@@ -1,12 +1,13 @@
 import React from "react";
 import "./Sidebar.css";
+import App from "../App";
 
-export default function Sidebar() {
+const Sidebar = ({ onAddNote }) => {
   return (
     <div className="app-sidebar">
       <div className="app-sidebar-header">
         <h1>ノート</h1>
-        <button>追加</button>
+        <button onClick={onAddNote}>追加</button>
       </div>
       <div className="app-sidebar-notes">
         <div className="app-sidebar-note">
@@ -20,4 +21,6 @@ export default function Sidebar() {
       </div>
     </div>
   );
-}
+};
+
+export default Sidebar;
