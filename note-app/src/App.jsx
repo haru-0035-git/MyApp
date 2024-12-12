@@ -9,8 +9,8 @@ function App() {
     console.log("新しくノートが追加されました");
     const newNote = {
       id: 1,
-      title: "新しいノートです",
-      content: "新しいノートの内容",
+      title: "新しいノート",
+      content: "新しいノートの内容...",
       modDate: Date.now(),
     };
     setNotes([...notes, newNote]);
@@ -18,7 +18,7 @@ function App() {
   };
   return (
     <div className="App">
-      <Sidebar onAddNote={onAddNote} />
+      <Sidebar onAddNote={onAddNote} notes={notes} />
       <Main />
     </div>
   );
