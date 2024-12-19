@@ -1,5 +1,5 @@
 import "./App.css";
-import Main from "./components/main";
+import Main from "./components/Main";
 import Sidebar from "./components/Sidebar";
 import { useState } from "react";
 import uuid from "react-uuid";
@@ -12,7 +12,7 @@ function App() {
     const newNote = {
       id: uuid(),
       title: "新しいノート",
-      content: "新しいノートの内容...",
+      content: "新しいノートの内容",
       modDate: Date.now(),
     };
     setNotes([...notes, newNote]);
@@ -24,6 +24,21 @@ function App() {
     setNotes(filterNotes);
   };
 
+  const getActiveNote = () => {
+    return notes.find((note) => note.id === activeNote);
+  };
+
+  const onUpdateNote = (onupdatedNote) => {
+    const updatedNotesArray = notes.map((note) => {
+      if (note.id === onupdatedNote.id) {
+        return onupdatedNote;
+      } else {
+        return note;
+      }
+    });
+    setNotes(updatedNotesArray);
+  };
+
   return (
     <div className="App">
       <Sidebar
@@ -33,7 +48,7 @@ function App() {
         activeNote={activeNote}
         setActiveNote={setActiveNote}
       />
-      <Main />
+      <Main activeNote={getActiveNote()} onUpdateNote={onUpdateNote} />
     </div>
   );
 }
