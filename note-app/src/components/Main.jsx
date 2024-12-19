@@ -31,11 +31,7 @@ const Main = ({ activeNote, onUpdateNote }) => {
       </div>
       <div className="app-main-note-preview">
         <h1 className="preview-title">{activeNote.title}</h1>
-        <ReactMarkdown>
-          <div className="markdown-preview">
-            {String(activeNote.content || "")}
-          </div>
-        </ReactMarkdown>
+        <ReactMarkdown>{activeNote.content}</ReactMarkdown>
       </div>
     </div>
   );
