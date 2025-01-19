@@ -1,7 +1,7 @@
 drop table if exists notes;
 
 create table notes (
-    id praimary key comment 'ID',
+    id primary key comment 'ID',
     title text not null comment 'ノートのタイトル',
     content_url text not null comment "マークダウンの内容が書かれているファイルのURL",
     user_id int not null comment 'いずれ追加したいログイン機能',
