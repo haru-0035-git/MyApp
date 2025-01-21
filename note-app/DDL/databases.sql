@@ -5,6 +5,6 @@ create table notes (
     title text not null comment 'ノートのタイトル',
     content_url text not null comment "マークダウンの内容が書かれているファイルのURL",
     user_id int comment 'いずれ追加したいログイン機能',
-    created_at timestamp not null comment '作成日時',
-    updated_at timestamp comment '更新日時',
+    created_at datetime not null comment '作成日時',
+    updated_at datetime comment '更新日時',
 )
