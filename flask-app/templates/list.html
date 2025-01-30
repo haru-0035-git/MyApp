@@ -1,0 +1,35 @@
+{% extends "base.html" %} {% block title %}収支一覧{% endblock %} {% block
+content %}
+<h1>📜 収支一覧</h1>
+
+<div class="alert alert-info">
+  💰 収入合計: <strong>{{ total_income }}</strong> 円 | 💸 支出合計:
+  <strong>{{ total_expense }}</strong> 円
+</div>
+
+<table class="table table-striped table-bordered">
+  <thead class="table-dark">
+    <tr>
+      <th>日付</th>
+      <th>カテゴリ</th>
+      <th>金額</th>
+      <th>種別</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for t in transactions %}
+    <tr>
+      <td>{{ t.date }}</td>
+      <td>{{ t.category }}</td>
+      <td>{{ t.amount }}</td>
+      <td>{{ "収入" if t.type == "income" else "支出" }}</td>
+      <td>
+        <a href="/edit/{{ t.id }}" class="btn btn-warning btn-sm">✏️ 編集</a>
+        <a href="/delete/{{ t.id }}" class="btn btn-danger btn-sm">🗑 削除</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
