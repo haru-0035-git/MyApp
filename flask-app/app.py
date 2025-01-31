@@ -34,11 +34,38 @@ def add():
 # 📜 収支一覧ページ（データ表示）
 @app.route('/list')
 def list_transactions():
-    transactions = Transaction.query.order_by(Transaction.date.desc()).all()
+    sort = request.args.get('sort', 'date')  # ソート（デフォルト：日付）
+    order = request.args.get('order', 'desc')  # 昇順 or 降順
+    filter_type = request.args.get('type', 'all')  # 絞り込み（all, income, expense）
+
+    # ソート条件
+    column = Transaction.date if sort == 'date' else Transaction.amount
+
+    # 並び順
+    transactions = Transaction.query.order_by(column.asc() if order == 'asc' else column.desc())
+
+    # 収入 or 支出の絞り込み
+    if filter_type == 'income':
+        transactions = transactions.filter_by(type='income')
+    elif filter_type == 'expense':
+        transactions = transactions.filter_by(type='expense')
+
+    transactions = transactions.all()
+
     total_income = sum(t.amount for t in transactions if t.type == 'income')
     total_expense = sum(t.amount for t in transactions if t.type == 'expense')
 
-    return render_template('list.html', transactions=transactions, total_income=total_income, total_expense=total_expense)
+    return render_template(
+        'list.html',
+        transactions=transactions,
+        total_income=total_income,
+        total_expense=total_expense,
+        sort=sort,
+        order=order,
+        filter_type=filter_type
+    )
+
+
 
 # ✏️ 収支の編集ページ
 @app.route('/edit/<int:id>', methods=['GET', 'POST'])
