@@ -12,6 +12,8 @@ dist
 dist-ssr
 *.local
 flask-env
+instance    
+kakeibo.db
 
 # Editor directories and files
 .vscode/*
